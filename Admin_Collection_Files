@@ -1,0 +1,111 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+ 
+
+namespace OnlineBloodBankSystem_Dao
+
+{
+
+   public class AdminCollectionDao
+
+    {
+
+        public void admin ()
+
+        {
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+ 
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("select  Hospital_Slot_Date, Hospital_Donor_Id from Hospital_Details", con);
+
+                    con.Open();
+
+ 
+
+                    Feedback_Detail feedback;
+
+ 
+
+                    Hospital_Detail hospital;
+
+ 
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+
+                    {
+
+                        hospital = new Hospital_Detail();
+
+                        hospital.Hospital_Slot_Date = dr["Hospital_Slot_Date"].ToString();
+
+                       
+
+                       
+
+                        feedback_list.Add(feedback);
+
+ 
+
+                    }
+
+ 
+
+ 
+
+               }
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+            }
+
+ 
+
+        }
+
+    }
+
+}

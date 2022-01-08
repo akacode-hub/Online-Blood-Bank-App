@@ -1,0 +1,83 @@
+Model Class:-
+
+Donor Details
+
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+    public class Donor_Details//fields
+
+    {
+
+        int _donorId;
+
+        string _bloodGroup;
+
+        string _state;
+
+        string _area;
+
+        int _pincode;
+
+        long _contactNumber;
+
+        public Donor_Details()//Default constructor
+
+        {
+
+        }
+
+ 
+
+        public Donor_Details(int donorId, string bloodGroup, string state, string area, int pincode, long contactNumber)//Parameterised constructor
+
+        {
+
+            DonorId = donorId;
+
+            BloodGroup = bloodGroup;
+
+            State = state;
+
+            Area = area;
+
+            Pincode = pincode;
+
+            ContactNumber = contactNumber;
+
+        }
+
+ 
+
+        public int DonorId { get => _donorId; set => _donorId = value; }//Properties
+
+        public string BloodGroup { get => _bloodGroup; set => _bloodGroup = value; }
+
+        public string State { get => _state; set => _state = value; }
+
+        public string Area { get => _area; set => _area = value; }
+
+        public int Pincode { get => _pincode; set => _pincode = value; }
+
+        public int Pincode1 { get => _pincode; set => _pincode = value; }
+
+        public long ContactNumber { get => _contactNumber; set => _contactNumber = value; }
+
+    }
+
+}
+
+ 

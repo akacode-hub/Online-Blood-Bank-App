@@ -1,0 +1,83 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using System.Configuration;
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Feedback_Form : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+        }
+
+ 
+
+        protected void btn_feedback_Click(object sender, EventArgs e)
+
+        {
+
+            DonorCollectionDao obj = new DonorCollectionDao();
+
+         
+
+            Feedback_Detail feedback = new Feedback_Detail();
+
+            feedback.FeedBack_Hospital_Name = txt_hospital_name.Text;
+
+            feedback.FeedBack_Hospital_City = ddl_city.Text;
+
+            feedback.FeedBack_Comments = txt_feedback_details.Text;
+
+ 
+
+ 
+
+            int login_id;
+
+            login_id = Convert.ToInt16(Session["userid"].ToString());
+
+            obj.Save_Feedback_details(feedback, login_id);
+
+ 
+
+            Response.Write("<script language='javascript'>window.alert('Your feedback has been noted. Thankyou :-) :-) Keep donating!!');window.location='Donor_Receiver.aspx';</script>");
+
+ 
+
+ 
+
+           
+
+        }
+
+    }
+
+}

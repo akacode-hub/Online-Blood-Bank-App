@@ -1,0 +1,185 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Transactions;
+
+ 
+
+namespace OnlineBloodBankSystem_Dao
+
+{
+
+    public class UserCollectionDao
+
+    {
+
+        public void Save_User_Details(User_Details user)//On registration,the user details is updated in the database.
+
+        {
+
+            using (TransactionScope s = new TransactionScope())//Defines the scope within which the code works.
+
+            {
+
+ 
+
+                // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))//Passing string connection
+
+                using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+                {
+
+                    try
+
+                    {
+
+                        SqlCommand cmd = new SqlCommand("INSERT INTO User_Details (User_First_Name,User_Last_Name, User_Age,User_Gender,User_Contact_Number,User_Email,User_Password,User_Weight,User_State,User_Area,User_Pincode,User_Blood_Group,User_UserName) VALUES (@FirstName, @LastName,@Age,@Gender,@ContactNumber,@Email,@Password,@Weight,@State,@Area,@Pincode,@BloodGroup,@UserName)", con);
+
+                        con.Open();
+
+                        cmd.Parameters.AddWithValue("@FirstName", user.FirstName);//Passing parameters
+
+                        cmd.Parameters.AddWithValue("@LastName", user.LastName);
+
+                        cmd.Parameters.AddWithValue("@Age", user.Age);
+
+                        cmd.Parameters.AddWithValue("@Gender", user.Gender);
+
+                        cmd.Parameters.AddWithValue("@ContactNumber", user.ContactNumber);
+
+                        cmd.Parameters.AddWithValue("@Email", user.Email);
+
+                        cmd.Parameters.AddWithValue("@Password", user.Password);
+
+                        cmd.Parameters.AddWithValue("@Weight", user.Weight);
+
+                        cmd.Parameters.AddWithValue("@State", user.State);
+
+                        cmd.Parameters.AddWithValue("@Area", user.Area);
+
+                        cmd.Parameters.AddWithValue("@Pincode", user.Pincode);
+
+                        cmd.Parameters.AddWithValue("@BloodGroup", user.BloodGroup);
+
+                        cmd.Parameters.AddWithValue("@UserName", user.UserName);
+
+                        cmd.ExecuteNonQuery();//For insert query,we use executeNonQuery
+
+ 
+
+                    }
+
+                    catch (Registration_Exception ex)
+
+                    {
+
+                        Console.WriteLine(ex.Message);
+
+ 
+
+                    }
+
+                    finally
+
+                    {
+
+                        con.Close();
+
+                    }
+
+                }
+
+ 
+
+                using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+               // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+                {
+
+                    try
+
+                    {
+
+                        SqlCommand cmd = new SqlCommand("Select User_Id,User_UserName,User_Password from User_Details where User_Id= (select max(User_Id) from User_Details)", con);
+
+                        con.Open();
+
+                        SqlDataReader dr = cmd.ExecuteReader();
+
+                        SqlCommand cmd1 = new SqlCommand("Insert Into [User_Login](Login_Id,Login_Name,Login_Password) Values (@loginId,@loginName,@loginPassword)", con);
+
+ 
+
+                        dr.Read();
+
+                        {
+
+                            cmd1.Parameters.AddWithValue("@loginId", dr[0]);
+
+                            cmd1.Parameters.AddWithValue("@loginName", dr[1].ToString());
+
+                            cmd1.Parameters.AddWithValue("@loginPassword", dr[2].ToString());
+
+                            cmd1.ExecuteNonQuery();
+
+                        }
+
+                    }
+
+ 
+
+                    catch (Exception ex1)
+
+                    {
+
+                        Console.WriteLine(ex1.Message);
+
+                    }
+
+ 
+
+                    finally
+
+                    {
+
+                        con.Close();
+
+                    }
+
+ 
+
+ 
+
+                }
+
+ 
+
+                s.Complete();
+
+            }
+
+ 
+
+        }
+
+ 
+
+    }
+
+}
+
+ 

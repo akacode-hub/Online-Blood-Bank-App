@@ -1,0 +1,157 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Web.Security;
+
+using System.Configuration;
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Login_Page : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+        }
+
+ 
+
+        protected void btn_Save_Click(object sender, EventArgs e)
+
+        {
+
+            SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True");
+
+            LoginCollectionDao obj = new LoginCollectionDao();
+
+         
+
+            User_Details user = new User_Details();
+
+            user.UserName = txt_username.Text;
+
+            user.Password = txt_password.Text;
+
+            //if (RememberMe.Checked== true)
+
+            int userid = obj.User_Login(user.UserName, user.Password);
+
+            if(userid == 1)
+
+           {
+
+                SqlCommand cmd1 = new SqlCommand("select Login_Id from User_Login where Login_Name =@usr", con);
+
+                con.Open();
+
+                cmd1.Parameters.AddWithValue("@usr", user.UserName);
+
+                SqlDataReader dr = cmd1.ExecuteReader();
+
+                dr.Read();
+
+                //Response.Write(dr[0].ToString());
+
+                Session["userid"] = dr[0].ToString();
+
+            }
+
+           
+
+            if (userid != 0)
+
+            {
+
+ 
+
+ 
+
+                //string roles = rolesDao.getRoleforUser(user.Name);
+
+ 
+
+                FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, user.UserName, DateTime.Now, DateTime.Now.AddMinutes(2880), RememberMe.Checked, user.Password, FormsAuthentication.FormsCookiePath);
+
+                string hash = FormsAuthentication.Encrypt(ticket);
+
+                HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, hash);
+
+ 
+
+                if (ticket.IsPersistent)
+
+                {
+
+                    cookie.Expires = ticket.Expiration;
+
+                }
+
+                Response.Cookies.Add(cookie);
+
+                //Response.Redirect(FormsAuthentication.GetRedirectUrl(Login1.UserName, Login1.RememberMeSet));
+
+                Response.Redirect("Donor_Receiver.aspx");
+
+ 
+
+            }
+
+            else
+
+            {
+
+                lbl_invalid.Visible = true;
+
+                //lbl_invalid.Text = "Invalid UserName and Password";
+
+            }
+
+ 
+
+ 
+
+        }
+
+ 
+
+        protected void btn_cancel_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Login_Page.aspx");
+
+        }
+
+ 
+
+      
+
+    }
+
+}

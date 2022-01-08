@@ -1,0 +1,79 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+    public class Hospital_Detail//Fields
+
+    {
+
+        //int _hospital_id;
+
+        string _hospital_Name;
+
+        string _Hospital_City;
+
+        string _hospital_Slot_Date;
+
+        string _hospital_Slot_Time;
+
+ 
+
+       // public int Hospital_id { get => _hospital_id; set => _hospital_id = value; }//Properties
+
+        public string Hospital_Name { get => _hospital_Name; set => _hospital_Name = value; }
+
+        public string Hospital_City { get => _Hospital_City; set => _Hospital_City = value; }
+
+        public string Hospital_Slot_Date { get => _hospital_Slot_Date; set => _hospital_Slot_Date = value; }
+
+        public string Hospital_Slot_Time { get => _hospital_Slot_Time; set => _hospital_Slot_Time = value; }
+
+ 
+
+        public Hospital_Detail() { }//Default constructor
+
+        public Hospital_Detail(string hospital_Name, string Hospital_City, string hospital_Slot_Date, string  hospital_Slot_Time)//Parameterised constructor
+
+        {
+
+            //Hospital_id = hospital_id;
+
+            Hospital_Name = hospital_Name;
+
+            this.Hospital_City = Hospital_City;
+
+            Hospital_Slot_Date = hospital_Slot_Date;
+
+            Hospital_Slot_Time = hospital_Slot_Time;
+
+        }
+
+        public override string ToString()
+
+        {
+
+ 
+
+            return base.ToString();
+
+        }
+
+ 
+
+    }
+
+}
+
+ 

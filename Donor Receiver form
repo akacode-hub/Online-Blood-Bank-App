@@ -1,0 +1,81 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using OnlineBloodBankSystem_Dao;
+
+using System.Configuration;
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Donor_Receiver : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+        }
+
+ 
+
+        protected void btn_donor_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Donor_Form.aspx");
+
+        }
+
+ 
+
+        protected void Button3_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Check_BloodAvailability.aspx");
+
+        }
+
+ 
+
+        protected void btn_receiver_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Feedback_Form.aspx");
+
+        }
+
+ 
+
+        protected void Button4_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Request_for_Blood.aspx");
+
+        }
+
+ 
+
+     
+
+    }
+
+}

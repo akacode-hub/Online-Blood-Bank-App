@@ -1,0 +1,49 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+ 
+
+namespace OnlineBloodBankSystem
+
+{
+
+    class Program
+
+    {
+
+        static void Main(string[] args)
+
+        {
+
+            ReceiverCollectionDao obj = new ReceiverCollectionDao();
+
+          
+
+            Console.WriteLine("a1");
+
+            Post_Request_Details request_result = new Post_Request_Details("A+", "aaaaa", 1234567890);
+
+            Console.WriteLine("a3");
+
+            obj.Save_Post_Request(request_result);
+
+            Console.WriteLine("a2");
+
+            Console.ReadKey();
+
+        }
+
+    }
+
+}

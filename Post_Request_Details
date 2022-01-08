@@ -1,0 +1,61 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+    public class Post_Request_Details
+
+    {
+
+      
+
+        string blood_Group;
+
+        string post_Request;
+
+        long contact_Number;
+
+ 
+
+        public Post_Request_Details() { }
+
+ 
+
+        public Post_Request_Details( string blood_Group, string post_Request, long contact_Number)
+
+        {
+
+           
+
+            this.blood_Group = blood_Group;
+
+            this.post_Request = post_Request;
+
+            this.contact_Number = contact_Number;
+
+        }
+
+ 
+
+    
+
+        public string Blood_Group { get => blood_Group; set => blood_Group = value; }
+
+        public string Post_Request { get => post_Request; set => post_Request = value; }
+
+        public long Contact_Number { get => contact_Number; set => contact_Number = value; }
+
+    }
+
+}

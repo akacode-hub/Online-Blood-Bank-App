@@ -1,0 +1,121 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Configuration;
+
+ 
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Home_Page : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            try
+
+            {
+
+ 
+
+ 
+
+                DonorCollectionDao obj1 = new DonorCollectionDao();
+
+                ReceiverCollectionDao obj = new ReceiverCollectionDao();
+
+ 
+
+                List<Post_Request_Details> result = obj.Post_Request();
+
+ 
+
+ 
+
+ 
+
+                grd_postrequest.DataSource = result;
+
+                grd_postrequest.DataBind();
+
+ 
+
+                List<Feedback_Detail> feedback = obj1.Feedback();
+
+ 
+
+ 
+
+ 
+
+                grd_feedback.DataSource = feedback;
+
+                grd_feedback.DataBind();
+
+            }
+
+            catch(Exception ex)
+
+            {
+
+                Response.Write(ex.Message);
+
+            }
+
+ 
+
+        }
+
+ 
+
+        protected void RegisterButton1_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Registration_Page.aspx");
+
+        }
+
+ 
+
+        protected void LoginButton1_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Login_Page.aspx");
+
+        }
+
+ 
+
+     
+
+    }
+
+}

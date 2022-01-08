@@ -1,0 +1,321 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Transactions;
+
+ 
+
+namespace OnlineBloodBankSystem_Dao
+
+{
+
+    public class ReceiverCollectionDao
+
+    {
+
+        public void Save_Receiver_Details(Receiver_Details receiver, int id)
+
+        {
+
+ 
+
+            // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            {
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("Insert Into Receiver_Details (Receiver_Id,Receiver_Blood_Group,Receiver_State,Receiver_Area,Receiver_Pin_Code,Receiver_Contact_Number) Values (@id,@bloodgroup,@state,@area,@pincode,@contactnumber) ", con);
+
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.Parameters.AddWithValue("@bloodgroup", receiver.RecBloodGroup);
+
+                    cmd.Parameters.AddWithValue("@state", receiver.RecState);
+
+                    cmd.Parameters.AddWithValue("@area", receiver.RecState);
+
+                    cmd.Parameters.AddWithValue("@pincode", receiver.RecPincode);
+
+                    cmd.Parameters.AddWithValue("@contactnumber", receiver.RecContactNumber);
+
+                    cmd.ExecuteNonQuery();
+
+                    
+
+                }
+
+                catch(Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+            }
+
+ 
+
+        }
+
+        public void Save_Post_Request(Post_Request_Details request)
+
+        {
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+           // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+ 
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("Insert Into Post_Request (Blood_Group,Post_Request,Contact_Number) Values (@bloodgroup,@post,@contactnumber) ", con);
+
+                    con.Open();
+
+                   
+
+                    cmd.Parameters.AddWithValue("@bloodgroup", request.Blood_Group);
+
+                    cmd.Parameters.AddWithValue("@post", request.Post_Request);
+
+                    cmd.Parameters.AddWithValue("@contactnumber", request.Contact_Number);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                catch(Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+            }
+
+ 
+
+        }
+
+        public List<Donor_Details> Blood_Availability_Request(string bloodgroup)
+
+        {
+
+            List<Donor_Details> donor_details_list = new List<Donor_Details>();
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("select * from Donor_Details where Donor_Blood_Group=@bloodgroup", con);
+
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@bloodgroup", bloodgroup);
+
+                    Donor_Details donor;
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+
+                    {
+
+                        donor = new Donor_Details();
+
+                        donor.BloodGroup = dr["Donor_Blood_Group"].ToString();
+
+                        donor.State = dr["Donor_State"].ToString();
+
+                        donor.Area = dr["Donor_Area"].ToString();
+
+                        donor.Pincode = Convert.ToInt32(dr["Donor_Pin_Code"].ToString());
+
+                        donor.ContactNumber = Convert.ToInt64(dr["Donor_Contact_Number"].ToString());
+
+ 
+
+                        donor_details_list.Add(donor);
+
+ 
+
+                    }
+
+                }
+
+ 
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+ 
+
+            }
+
+            return donor_details_list;
+
+        }
+
+        public List<Post_Request_Details> Post_Request()
+
+        {
+
+            List<Post_Request_Details> post_request_list = new List<Post_Request_Details>();
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            //using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("select Blood_Group,Post_Request,Contact_Number from Post_Request", con);
+
+                    con.Open();
+
+                    Post_Request_Details request;
+
+ 
+
+ 
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+
+                    {
+
+                        request = new Post_Request_Details();
+
+                        request.Blood_Group = dr["Blood_Group"].ToString();
+
+                        request.Post_Request = dr["Post_Request"].ToString();
+
+                        request.Contact_Number = Convert.ToInt64(dr["Contact_Number"].ToString());
+
+ 
+
+ 
+
+ 
+
+                        post_request_list.Add(request);
+
+ 
+
+                    }
+
+                }
+
+ 
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+ 
+
+ 
+
+            }
+
+            return post_request_list;
+
+        }
+
+ 
+
+    }
+
+}
+
+ 

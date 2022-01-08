@@ -1,0 +1,57 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+ 
+
+namespace OnlineBloodBankSystem_Dao
+
+{
+
+    public class Registration_Exception : Exception
+
+    {
+
+        string msg;
+
+        public Registration_Exception() { }
+
+        public Registration_Exception(string msg)
+
+        {
+
+            this.msg = msg;
+
+        }
+
+        public string Msg
+
+        {
+
+            get { return msg; }
+
+            set { msg = value; }
+
+        }
+
+        public override string ToString()
+
+        {
+
+            return string.Format("{0}", this.msg);
+
+        }
+
+    }
+
+}

@@ -1,0 +1,107 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Transactions;
+
+ 
+
+namespace OnlineBloodBankSystem_Dao
+
+{
+
+    public class LoginCollectionDao
+
+    {
+
+        public int User_Login(string a, string b)
+
+        {
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("select count (*) as cnt from User_Login where Login_Name=@usr and Login_Password=@pwd", con);
+
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@usr", a);
+
+                    cmd.Parameters.AddWithValue("@pwd", b);
+
+                    if (cmd.ExecuteScalar().ToString() == "1")
+
+                    {
+
+                       // Console.WriteLine("YOU ARE GRANTED WITH ACCESS");
+
+                        return 1;
+
+                    }
+
+                    else
+
+                    {
+
+                       // Console.WriteLine("YOU ARE NOT GRANTED WITH ACCESS");
+
+                        return 0;
+
+                    }
+
+                }
+
+ 
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+ 
+
+                return 0;
+
+            }
+
+        }
+
+       
+
+    }
+
+}

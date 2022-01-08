@@ -1,0 +1,137 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+     public class User_Details//Fields
+
+    {
+
+        //int _id;
+
+        string _firstName;
+
+        string _lastName;
+
+        int age;
+
+        string _gender;
+
+        long _contactNumber;
+
+        string _email;
+
+        string _password;
+
+        decimal _weight;
+
+        string _state;
+
+        string _area;
+
+        int _pincode;
+
+        string _bloodGroup;
+
+        string _userName;
+
+ 
+
+ 
+
+        // public int Id1 { get => _id; set => _id = value; }
+
+        public string FirstName { get => _firstName; set => _firstName = value; }//Properties
+
+        public string LastName { get => _lastName; set => _lastName = value; }
+
+        public int Age { get => age; set => age = value; }
+
+        public string Gender { get => _gender; set => _gender = value; }
+
+        public long ContactNumber { get => _contactNumber; set => _contactNumber = value; }
+
+        public string Email { get => _email; set => _email = value; }
+
+        public string Password { get => _password; set => _password = value; }
+
+        public decimal Weight { get => _weight; set => _weight = value; }
+
+        public string State { get => _state; set => _state = value; }
+
+        public string Area { get => _area; set => _area = value; }
+
+        public int Pincode { get => _pincode; set => _pincode = value; }
+
+        public string BloodGroup { get => _bloodGroup; set => _bloodGroup = value; }
+
+        public string UserName { get => _userName; set => _userName = value; }
+
+ 
+
+        public User_Details() { }//Default constructor
+
+ 
+
+        public User_Details(string firstName, string lastName, int age, string gender, long contactNumber, string email, string password, decimal weight, string state, string area, int pincode, string bloodGroup, string userName)//Parameterised constructor
+
+        {
+
+            // _id = id;
+
+            _firstName = firstName;
+
+            _lastName = lastName;
+
+            this.age = age;
+
+            _gender = gender;
+
+            _contactNumber = contactNumber;
+
+            _email = email;
+
+            _password = password;
+
+            _weight = weight;
+
+            _state = state;
+
+            _area = area;
+
+            _pincode = pincode;
+
+            _bloodGroup = bloodGroup;
+
+            _userName = userName;
+
+        }
+
+        public override string ToString()
+
+        {
+
+            string s = string.Format("{0:C}", Weight);
+
+            string str = string.Format("\t\t{0,-10}{1,-20}{2,-10}{3,-10}{4,-20}{5,-20}{6,-10}", _firstName, _lastName, age, _gender, _contactNumber, _email, _password, s, _state, _area, _pincode, _bloodGroup);
+
+            return str;
+
+ 
+
+        }
+
+    }
+
+}

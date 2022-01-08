@@ -1,0 +1,107 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Configuration;
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Hospita : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+        }
+
+ 
+
+        protected void btn_hosp_search_Click(object sender, EventArgs e)
+
+        {
+
+            try
+
+            {
+
+                DonorCollectionDao obj = new DonorCollectionDao();
+
+ 
+
+                Hospital_Detail hospital = new Hospital_Detail();
+
+                hospital.Hospital_Name = txt_hosp_name.Text;
+
+                hospital.Hospital_City = ddl_city.Text;
+
+                hospital.Hospital_Slot_Date = txt_date.Text;
+
+                hospital.Hospital_Slot_Time = txt_time.Text;
+
+                int login_id;
+
+                login_id = Convert.ToInt16(Session["userid"].ToString());
+
+ 
+
+                obj.Save_Hospital_Details(hospital, login_id);
+
+                Response.Write("<script language='javascript'>window.alert('Slot booked successfully, you are going to save a life');window.location='Donor_Receiver.aspx';</script>");
+
+            }
+
+            catch(Hospital_Exception ex)
+
+            {
+
+                // Response.Write("<script language='javascript'>window.alert('Sorry, please try a different slot);window.location='Hospital_nearby_search.aspx';</script>");
+
+                //Response.Write("hello");
+
+                lbl_message.Visible = true;
+
+                //Response.Write("<script language='javascript'>window.alert('Sorry, please try a different slot);</script>");
+
+            }
+
+          
+
+ 
+
+            //Response.Redirect("Hospital_nearby_search.aspx");
+
+        }
+
+ 
+
+       
+
+    }
+
+}
+
+ 

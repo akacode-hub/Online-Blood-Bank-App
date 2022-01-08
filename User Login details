@@ -1,0 +1,61 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+    public class User_Login_Details//Fields
+
+    {
+
+        int _userLoginId;
+
+        string _userName;
+
+        string _userPassword;
+
+        bool _rememberMe;
+
+ 
+
+        public User_Login_Details() { }//Default constructor
+
+ 
+
+        public User_Login_Details(int userLoginId, string userName, string userPassword, bool rememberMe)//Parameterised Constructor
+
+        {
+
+            UserLoginId = userLoginId;
+
+            UserName = userName;
+
+            UserPassword = userPassword;
+
+            RememberMe = rememberMe;
+
+        }
+
+ 
+
+        public int UserLoginId { get => _userLoginId; set => _userLoginId = value; }//Properties
+
+        public string UserName { get => _userName; set => _userName = value; }
+
+        public string UserPassword { get => _userPassword; set => _userPassword = value; }
+
+        public bool RememberMe { get => _rememberMe; set => _rememberMe = value; }
+
+    }
+
+}

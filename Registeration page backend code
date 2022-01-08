@@ -1,0 +1,103 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Configuration;
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Registration_Page : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+ 
+
+        }
+
+ 
+
+        protected void Button1_Click1(object sender, EventArgs e)
+
+        {
+
+           
+
+            UserCollectionDao obj = new UserCollectionDao();
+
+            User_Details user = new User_Details();
+
+            user.FirstName = txt_first_name.Text;
+
+            user.LastName = txt_last_name.Text;
+
+            user.UserName = txt_user_name.Text;
+
+            user.Email = txt_email.Text;
+
+            user.Password = txt_password.Text;
+
+            user.Age = Convert.ToInt32(txt_age.Text);
+
+            //if (rdb_Male.Checked) user.Gender = "Male";
+
+            //if (rdb_Female.Checked) user.Gender = "Female";
+
+           user.Gender = ddl_blood_group.Text;
+
+            user.BloodGroup = ddl_blood_group.Text;
+
+            user.Weight = Convert.ToInt32(txt_weight.Text);
+
+            user.ContactNumber = Convert.ToInt64(txt_phone_number.Text);
+
+            user.Area = txt_address.Text;
+
+            user.State = ddl_state.Text;
+
+            user.Pincode = Convert.ToInt32(txt_pincode.Text);
+
+            obj.Save_User_Details(user);
+
+            // Response.Write("<script>alert('New user created successfully')</script>");
+
+            //string page = "Login Page.aspx";
+
+            //string myStringVariable = "New user created successfully";
+
+            //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + myStringVariable + "'),Response.Redirect('" + page + "' );", true);
+
+            Response.Write("<script language='javascript'>window.alert('New user created successfully');window.location='Login_Page.aspx';</script>");
+
+        }
+
+    }
+
+}
+
+ 

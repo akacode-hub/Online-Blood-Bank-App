@@ -1,0 +1,77 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+    public class Feedback_Detail//Fields
+
+    {
+
+       
+
+        string _feedBack_Hospital_Name;
+
+        string _feedBack_Hospital_City;
+
+        string _feedBack_Comments;
+
+ 
+
+        public string FeedBack_Comments { get => _feedBack_Comments; set => _feedBack_Comments = value; }//Properties
+
+        public string FeedBack_Hospital_Name { get => _feedBack_Hospital_Name; set => _feedBack_Hospital_Name = value; }
+
+        public string FeedBack_Hospital_City { get => _feedBack_Hospital_City; set => _feedBack_Hospital_City = value; }
+
+       // public int Feedback_id { get => _feedback_id; set => _feedback_id = value; }
+
+ 
+
+        public Feedback_Detail() { }//Default constructor
+
+ 
+
+        public Feedback_Detail(string feedBack_Hospital_Name, string feedBack_Hospital_City, string feedBack_Comments)//Parameterised Constructor
+
+        {
+
+          //  _feedback_id = feedback_id;
+
+           _feedBack_Hospital_Name = feedBack_Hospital_Name;
+
+            _feedBack_Hospital_City = feedBack_Hospital_City;
+
+            _feedBack_Comments = feedBack_Comments;
+
+        }
+
+ 
+
+        public override string ToString()
+
+        {
+
+ 
+
+            return base.ToString();
+
+        }
+
+ 
+
+    }
+
+}
+
+ 

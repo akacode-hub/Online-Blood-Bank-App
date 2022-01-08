@@ -1,0 +1,75 @@
+Receiver Details
+
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+ 
+
+namespace OnlineBloodBankSystem_Model
+
+{
+
+     public class Receiver_Details//Fields
+
+    {
+
+        int _receiverId;
+
+        string _recBloodGroup;
+
+        string _recState;
+
+        string _recArea;
+
+        int _recPincode;
+
+        long _recContactNumber;
+
+       
+
+        public Receiver_Details() { }//Default constructor
+
+        public Receiver_Details(int receiverId, string recBloodGroup, string recState, string recArea, int recPincode, long recContactNumber)//Prameterised Constructor
+
+        {
+
+            ReceiverId = receiverId;
+
+            RecBloodGroup = recBloodGroup;
+
+            RecState = recState;
+
+            RecArea = recArea;
+
+            RecPincode = recPincode;
+
+            RecContactNumber = recContactNumber;
+
+        }
+
+ 
+
+        public int ReceiverId { get => _receiverId; set => _receiverId = value; }//properties
+
+        public string RecBloodGroup { get => _recBloodGroup; set => _recBloodGroup = value; }
+
+        public string RecState { get => _recState; set => _recState = value; }
+
+        public string RecArea { get => _recArea; set => _recArea = value; }
+
+        public int RecPincode { get => _recPincode; set => _recPincode = value; }
+
+        public long RecContactNumber { get => _recContactNumber; set => _recContactNumber = value; }
+
+    }
+
+}
+
+ 

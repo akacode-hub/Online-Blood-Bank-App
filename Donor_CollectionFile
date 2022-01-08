@@ -1,0 +1,393 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Text;
+
+using System.Threading.Tasks;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Transactions;
+
+using OnlineBloodBankSystem_Dao;
+
+ 
+
+namespace OnlineBloodBankSystem_Dao
+
+{
+
+    public class DonorCollectionDao
+
+    {
+
+        public void Save_Donor_Details(Donor_Details donor, int id)
+
+        {
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+ 
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("Insert Into Donor_Details (Donor_Id,Donor_Blood_Group,Donor_State,Donor_Area,Donor_Pin_Code,Donor_Contact_Number) Values (@id,@bloodgroup,@state,@area,@pincode,@contactnumber) ", con);
+
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.Parameters.AddWithValue("@bloodgroup", donor.BloodGroup);
+
+                    cmd.Parameters.AddWithValue("@state", donor.State);
+
+                    cmd.Parameters.AddWithValue("@area", donor.Area);
+
+                    cmd.Parameters.AddWithValue("@pincode", donor.Pincode);
+
+                    cmd.Parameters.AddWithValue("@contactnumber", donor.ContactNumber);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+ 
+
+            }
+
+ 
+
+        }
+
+        public void Save_Feedback_details(Feedback_Detail feedback, int id)
+
+        {
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            //using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+ 
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("Insert Into User_Feedback_Details (User_Feedback_Hospital_Name,User_FeedBack_City,User_Feedback_Comments,User_Feedback_Id) Values (@name,@city,@comments,@id) ", con);
+
+                    con.Open();
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    cmd.Parameters.AddWithValue("@name", feedback.FeedBack_Hospital_Name);
+
+                    cmd.Parameters.AddWithValue("@city", feedback.FeedBack_Hospital_City);
+
+                    cmd.Parameters.AddWithValue("@comments", feedback.FeedBack_Comments);
+
+                    cmd.ExecuteNonQuery();
+
+                }
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+ 
+
+            }
+
+ 
+
+ 
+
+        }
+
+        public List<Feedback_Detail> Feedback()
+
+        {
+
+            List<Feedback_Detail> feedback_list = new List<Feedback_Detail>();
+
+            using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+            //using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+            {
+
+                try
+
+                {
+
+                    SqlCommand cmd = new SqlCommand("select User_FeedBack_Comments from User_Feedback_Details", con);
+
+                    con.Open();
+
+                    Feedback_Detail feedback;
+
+ 
+
+ 
+
+ 
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+
+                    {
+
+                        feedback = new Feedback_Detail();
+
+                        feedback.FeedBack_Comments = dr["User_FeedBack_Comments"].ToString();
+
+                       
+
+ 
+
+ 
+
+                        feedback_list.Add(feedback);
+
+ 
+
+                    }
+
+                }
+
+ 
+
+                catch (Exception ex)
+
+                {
+
+                    Console.WriteLine(ex.Message);
+
+                }
+
+ 
+
+ 
+
+                finally
+
+                {
+
+                    con.Close();
+
+                }
+
+ 
+
+ 
+
+            }
+
+            return feedback_list;
+
+        }
+
+ 
+
+        public void Save_Hospital_Details(Hospital_Detail donor, int id)
+
+        {
+
+            using (TransactionScope s = new TransactionScope())
+
+            {
+
+                using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+                // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+                {
+
+ 
+
+                    try
+
+                    {
+
+                        SqlCommand cmd = new SqlCommand("Insert Into Hospital_Details (Hospital_Donor_Id,Hospital_Name,Hospital_City,Hospital_Slot_Date,Hospital_Slot_Time) Values (@id,@name,@city,@date,@time) ", con);
+
+                        con.Open();
+
+                        cmd.Parameters.AddWithValue("@id", id);
+
+                        cmd.Parameters.AddWithValue("@name", donor.Hospital_Name);
+
+                        cmd.Parameters.AddWithValue("@city", donor.Hospital_City);
+
+                        cmd.Parameters.AddWithValue("@date", donor.Hospital_Slot_Date);
+
+                        cmd.Parameters.AddWithValue("@time", donor.Hospital_Slot_Time);
+
+                        cmd.ExecuteNonQuery();
+
+                    }
+
+                    catch (Exception ex)
+
+                    {
+
+                        Console.WriteLine(ex.Message);
+
+                    }
+
+ 
+
+ 
+
+                    finally
+
+                    {
+
+                        con.Close();
+
+                    }
+
+ 
+
+                }
+
+                using (SqlConnection con = new SqlConnection(Helper.constructor))
+
+                // using (SqlConnection con = new SqlConnection(@"Data Source=(localdb)\mssqllocaldb;Initial Catalog=Online_Blood_Donation_System;Integrated Security=True;Pooling=False;MultipleActiveResultSets=True"))
+
+                {
+
+                    try
+
+                    {
+
+                        SqlCommand cmd = new SqlCommand("SELECT Hospital_Name,Hospital_City,Hospital_Slot_Date, Hospital_Slot_Time, COUNT(*) FROM dbo.Hospital_Details GROUP BY Hospital_Name,Hospital_City,Hospital_Slot_Date, Hospital_Slot_Time HAVING COUNT(*) > 1;", con);
+
+                        con.Open();
+
+                        SqlDataReader dr = cmd.ExecuteReader();
+
+                        if (!dr.HasRows)
+
+                        {
+
+                            //if (Convert.ToInt32(dr[4].ToString()) == 1)
+
+                            //{
+
+                            s.Complete();
+
+                           // con.Close();
+
+ 
+
+                        }
+
+                       else
+
+                        {
+
+                            throw new Hospital_Exception("Sorry, please try a different slot");
+
+                        }
+
+                       // Console.WriteLine("Sorry, please try a different slot");
+
+                    }
+
+                    catch (Hospital_Exception e)
+
+                    {
+
+                        throw;
+
+                    }
+
+                    catch (Exception ex)
+
+                    {
+
+                        Console.WriteLine(ex.Message);
+
+                    }
+
+ 
+
+ 
+
+                    finally
+
+                    {
+
+                        con.Close();
+
+                    }
+
+ 
+
+ 
+
+                }
+
+         }
+
+ 
+
+        }
+
+ 
+
+    }
+
+}

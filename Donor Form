@@ -1,0 +1,85 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using OnlineBloodBankSystem_Model;
+
+using OnlineBloodBankSystem_Dao;
+
+using System.Data.SqlClient;
+
+using System.Data;
+
+using System.Configuration;          
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Donor_Form : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+ 
+
+        }
+
+ 
+
+        protected void btn_Donor_submit_Click(object sender, EventArgs e)
+
+        {
+
+            DonorCollectionDao obj = new DonorCollectionDao();
+
+          
+
+            Donor_Details donor = new Donor_Details();
+
+            donor.BloodGroup = ddl_blood_group.Text;
+
+            donor.State = ddl_state.Text;
+
+            donor.Area = ddl_area.Text;
+
+            donor.ContactNumber = Convert.ToInt64(txt_phone_number.Text);
+
+            donor.Pincode = Convert.ToInt32(txt_pincode.Text);
+
+            int login_id;
+
+            login_id =Convert.ToInt16(Session["userid"].ToString());
+
+            obj.Save_Donor_Details(donor, login_id);
+
+ 
+
+           
+
+           
+
+            Response.Redirect("Hospital_nearby_search.aspx");
+
+        }
+
+    }
+
+}
+
+ 

@@ -1,0 +1,3477 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Request_for_Blood.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Request_for_Blood" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+
+     .auto-style5 {
+
+            text-align: left;
+
+        }
+
+ 
+
+        .button {
+
+  background-color: #B22222;
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+        .auto-style6 {
+
+            text-align: center;
+
+        }
+
+        .auto-style7 {
+
+            width: 100%;
+
+        }
+
+        .auto-style9 {
+
+            text-align: left;
+
+            font-size: x-large;
+
+            color: #B22222;
+
+        }
+
+        .newStyle2 {
+
+            font-family: Georgia;
+
+        }
+
+        /*div {
+
+  border-radius: 5px;
+
+  background-color: #f2f2f2;
+
+  padding: 20px;
+
+            }*/
+
+        #grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+        .newStyle3 {
+
+            color: #B22222;
+
+            font-size: 0px;
+
+        }
+
+        .auto-style10 {
+
+            width: 167px;
+
+            height: 67px;
+
+            text-align: left;
+
+        }
+
+        .auto-style11 {
+
+            height: 67px;
+
+        }
+
+        .auto-style17 {
+
+            height: 75px;
+
+        }
+
+        .auto-style19 {
+
+            text-align: left;
+
+            color: #FF0000;
+
+        }
+
+        .auto-style20 {
+
+        width: 167px;
+
+        height: 75px;
+
+        text-align: left;
+
+    }
+
+        </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+    <p class="auto-style9">
+
+        <strong>Request Donor for the availability of blood </strong> </p>
+
+     <p class="auto-style6">
+
+         <asp:Label ID="Label1" runat="server" Text="Your Blood Requirements are successfully posted on homepage " Visible="False" ForeColor="Black" Font-Bold="True" Font-Italic="True"></asp:Label>
+
+         !!</p>
+
+     <table class="auto-style7">
+
+         <tr>
+
+             <td class="auto-style10" style="font-weight: bold">Blood Group<span class="auto-style19">*</span></td>
+
+             <td class="auto-style11">
+
+        <asp:DropDownList ID="ddl_blood_group" runat="server" Height="24px" Width="220px">
+
+            <asp:ListItem>A+</asp:ListItem>
+
+            <asp:ListItem>A-</asp:ListItem>
+
+            <asp:ListItem>B+</asp:ListItem>
+
+            <asp:ListItem>B-</asp:ListItem>
+
+            <asp:ListItem>AB+</asp:ListItem>
+
+            <asp:ListItem>AB-</asp:ListItem>
+
+            <asp:ListItem>O+</asp:ListItem>
+
+            <asp:ListItem>O-</asp:ListItem>
+
+        </asp:DropDownList>
+
+                 <asp:RequiredFieldValidator ID="val_blood_group" runat="server" ControlToValidate="ddl_blood_group" ErrorMessage="Required Field" ForeColor="Red"></asp:RequiredFieldValidator>
+
+             </td>
+
+         </tr>
+
+         <tr>
+
+             <td class="auto-style20">
+
+                 <asp:Label ID="Label2" runat="server" Font-Bold="True" Text="Post for request:"></asp:Label>
+
+                 <span class="auto-style19">*</span>
+
+    &nbsp;&nbsp;</td>
+
+             <td class="auto-style17">
+
+             &nbsp;
+
+                 <br />
+
+&nbsp;<asp:TextBox ID="txt_post" runat="server" TextMode="MultiLine" Width="256px"></asp:TextBox>
+
+                 <asp:RequiredFieldValidator ID="val_post" runat="server" ControlToValidate="txt_post" ErrorMessage="Enter the post." ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+             </td>
+
+         </tr>
+
+         <tr>
+
+             <td class="auto-style20" style="font-weight: bold">Contact no : </td>
+
+             <td class="auto-style17">
+
+                 <asp:TextBox ID="txt_contact" runat="server" Width="208px"></asp:TextBox>
+
+                 <asp:RegularExpressionValidator ID="val_contactnumber" runat="server" ControlToValidate="txt_contact" ErrorMessage="Enter the contact number." ForeColor="#CC0000" ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+
+             </td>
+
+         </tr>
+
+     </table>
+
+     <p class="auto-style5">
+
+         &nbsp;</p>
+
+  
+
+    <asp:Button class="button button3" ID="btn_submit_request" runat="server" Text="Submit Request " OnClick="btn_submit_request_Click"/>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+        </div>
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Registration_Page.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Registration_Page" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+
+/*input[type=text], select {
+
+  width: 100%;
+
+  padding: 12px 20px;
+
+  margin: 8px 0;
+
+  display: inline-block;
+
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+  box-sizing: border-box;
+
+}*/
+
+ 
+
+input[type=submit] {
+
+  width: 100%;
+
+  background-color: #B22222;
+
+  color: white;
+
+  padding: 14px 20px;
+
+  margin: 8px 0;
+
+  border: none;
+
+  border-radius: 4px;
+
+  cursor: pointer;
+
+}
+
+ 
+
+input[type=submit]:hover {
+
+  background-color:         #8B0000;
+
+}
+
+ 
+
+/*div {
+
+  border-radius: 5px;
+
+  background-color: #f2f2f2;
+
+  padding: 20px;
+
+}*/
+
+#grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+       .auto-style5 {
+
+           color: #CC0000;
+
+       }
+
+       .auto-style6 {
+
+           width: 100%;
+
+       }
+
+       .auto-style10 {
+
+           font-size: large;
+
+       }
+
+        .auto-style12 {
+
+            width: 154px;
+
+        }
+
+    .auto-style13 {
+
+        margin-top: 24px;
+
+    }
+
+    .auto-style15 {
+
+        width: 1250px;
+
+    }
+
+       .auto-style17 {
+
+            width: 159px;
+
+            height: 40px;
+
+        }
+
+        .auto-style18 {
+
+            height: 40px;
+
+        }
+
+        .auto-style19 {
+
+            margin-left: 0px;
+
+        }
+
+        .auto-style20 {
+
+            width: 158px;
+
+        }
+
+        .auto-style21 {
+
+            width: 159px;
+
+        }
+
+        .auto-style22 {
+
+            width: 159px;
+
+            height: 18px;
+
+        }
+
+        .auto-style23 {
+
+            height: 18px;
+
+        }
+
+   </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+    <p style="text-align: left">
+
+        &nbsp;</p>
+
+    <h2 style="text-align: left">
+
+        <strong><span class="auto-style5">REGISTER</span></strong></h2>
+
+    <h2 style="text-align: left; font-style: italic; font-weight: bold;">
+
+        <strong><span class="auto-style5">&nbsp;</span></strong><span style="color: rgb(0, 0, 0); font-family: Arial, Helvetica, sans-serif; font-size: medium; font-style: italic; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: bold; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; display: inline !important; float: none;">Please fill in this form to create a blood bank&nbsp; account.</span></h2>
+
+    <p style="text-align: left">
+
+        &nbsp;</p>
+
+    <h3 style="text-align: left; color: #CC0000;">
+
+        Login Information</h3>
+
+    <p style="text-align: left">
+
+        <table class="auto-style6">
+
+            <tr>
+
+                <td class="auto-style20" id="lbl_first_name" style="font-weight: bold">First Name<span class="auto-style5">*</span> : </td>
+
+                <td class="auto-style15"> <asp:TextBox ID="txt_first_name" runat="server" autofocus="true" Width="216px" Height="16px"></asp:TextBox>&nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txt_first_name" ErrorMessage="Enter Valid First Name" ForeColor="#CC0000" ValidationExpression="^[a-zA-Z'.\s]{1,50}"></asp:RegularExpressionValidator>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:RequiredFieldValidator ID="val_first_name" runat="server" ControlToValidate="txt_first_name" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style20" id="lbl_last_name" style="font-weight: bold">Last Name<span class="auto-style5">*</span>:</td>
+
+                <td class="auto-style15"> <asp:TextBox ID="txt_last_name" runat="server" Width="215px" Height="16px"></asp:TextBox>
+
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txt_last_name" ErrorMessage="Enter Valid Last Name" ForeColor="#CC0000" ValidationExpression="^[a-zA-Z'.\s]{1,50}"></asp:RegularExpressionValidator>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:RequiredFieldValidator ID="val_last_name" runat="server" ControlToValidate="txt_last_name" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style20" id="lbl_last_name">
+
+                    <asp:Label ID="lbl_user_name" runat="server" Text="User Name" Font-Bold="True"></asp:Label>
+
+                    <span class="auto-style5">*:</span></td>
+
+                <td class="auto-style15">
+
+                    <asp:TextBox ID="txt_user_name" runat="server" Width="216px"></asp:TextBox>
+
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="txt_user_name" ErrorMessage="Enter valid username." ForeColor="#CC0000" ValidationExpression="^[a-zA-Z0-9'.\s]{1,50}"></asp:RegularExpressionValidator>
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <asp:RequiredFieldValidator ID="Val_username" runat="server" ControlToValidate="txt_user_name" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style20" id="lbl_email" style="font-weight: bold">Email Id <span class="auto-style5">*</span>: </td>
+
+                <td class="auto-style15"> <asp:TextBox ID="txt_email" runat="server" Width="216px" Height="16px" CssClass="auto-style13"></asp:TextBox>
+
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txt_email" ErrorMessage="Enter Valid Email Address" ForeColor="#CC0000" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"></asp:RegularExpressionValidator>
+
+&nbsp;<asp:RequiredFieldValidator ID="val_email" runat="server" ControlToValidate="txt_email" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style20" id="lbl_Password" style="font-weight: bold">Password <span class="auto-style5">*</span>: </td>
+
+                <td class="auto-style15"> <asp:TextBox ID="txt_password" runat="server" Width="215px" TextMode="Password" Height="20px"></asp:TextBox>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <asp:RequiredFieldValidator ID="val_password" runat="server" ControlToValidate="txt_password" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style20" id="lbl_confirm_password" style="font-weight: bold">Confirm Password <span class="auto-style5">*</span>:</td>
+
+                <td class="auto-style15"> <asp:TextBox ID="txt_confirm_password" runat="server" Width="216px" TextMode="Password" Height="19px"></asp:TextBox>
+
+        <asp:CompareValidator ID="com_val_Confirm_Password" runat="server" ControlToCompare="txt_password" ControlToValidate="txt_confirm_password" ErrorMessage="Must Match The Password Entry" ForeColor="#CC0000"></asp:CompareValidator>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </p>
+
+   
+
+    <h3 style="text-align: left">
+
+        &nbsp;</h3>
+
+        <p style="text-align: left">
+
+            &nbsp;</p>
+
+    <h3 style="text-align: left; color: #CC0000;">
+
+        Detailed Information
+
+    </h3>
+
+    <table class="auto-style6">
+
+        <tr>
+
+            <td class="auto-style21" id="lbl_age" style="font-weight: bold">Age<span class="auto-style5">*</span> : </td>
+
+      
+
+            <td> <asp:TextBox ID="txt_age" runat="server" Width="211px" Height="16px"></asp:TextBox>
+
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="txt_age" ErrorMessage="Enter Valid Age" ForeColor="#CC0000" ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <asp:RequiredFieldValidator ID="val_age" runat="server" ControlToValidate="txt_age" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style22" id="rb_gender" style="font-weight: bold">Gender<span class="auto-style5">*</span> : </td>
+
+        
+
+            <td class="auto-style23">
+
+        &nbsp;<asp:DropDownList ID="ddl_gender" runat="server" CssClass="auto-style19" Height="18px" Width="209px">
+
+                    <asp:ListItem>Male</asp:ListItem>
+
+                    <asp:ListItem>Female</asp:ListItem>
+
+                    <asp:ListItem>Other</asp:ListItem>
+
+                </asp:DropDownList>
+
+    &nbsp; </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style17" id="lbl_blood_group" style="font-weight: bold">Your Blood group<span class="auto-style5">*</span> :</td>
+
+            <td class="auto-style18">
+
+        <asp:DropDownList ID="ddl_blood_group" runat="server" Height="18px" Width="216px">
+
+            <asp:ListItem>A+</asp:ListItem>
+
+            <asp:ListItem>A-</asp:ListItem>
+
+            <asp:ListItem>B+</asp:ListItem>
+
+            <asp:ListItem>B-</asp:ListItem>
+
+            <asp:ListItem>O+</asp:ListItem>
+
+            <asp:ListItem>O-</asp:ListItem>
+
+            <asp:ListItem>AB+</asp:ListItem>
+
+            <asp:ListItem>AB-</asp:ListItem>
+
+            <asp:ListItem></asp:ListItem>
+
+        </asp:DropDownList>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:RequiredFieldValidator ID="val_blood_group" runat="server" ControlToValidate="ddl_blood_group" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style17" id="lbl_weight" style="font-weight: bold">Weight<span class="auto-style5">*</span> : </td>
+
+            <td class="auto-style18"> <asp:TextBox ID="txt_weight" runat="server" Width="216px" Height="16px"></asp:TextBox>
+
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ControlToValidate="txt_weight" ErrorMessage="Enter Valid Weight" ForeColor="#CC0000" ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:RequiredFieldValidator ID="val_weight" runat="server" ControlToValidate="txt_weight" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+    <p style="text-align: left">
+
+        &nbsp;</p>
+
+        <p style="text-align: left">
+
+            <strong><span class="auto-style10" style="color: #CC0000">Contact Information &nbsp;&nbsp;&nbsp;</span></strong><table class="auto-style6"></h3>
+
+        <tr>
+
+            <td class="auto-style12" style="font-weight: bold">Phone No<span class="auto-style5">*</span>:</td>
+
+            <td>
+
+        <asp:TextBox ID="txt_phone_number" runat="server" Width="220px" Height="16px" MaxLength="10" TextMode="Number"></asp:TextBox>
+
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="txt_phone_number" ErrorMessage="Enter Valid Phone Number" ForeColor="#CC0000" ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+
+&nbsp;<asp:RequiredFieldValidator ID="val_phone_number" runat="server" ControlToValidate="txt_phone_number" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style12" id="lbl_address" style="font-weight: bold">Address<span class="auto-style5">*</span> : </td>
+
+            <td><asp:TextBox ID="txt_address" runat="server" Height="77px" Width="214px" TextMode="MultiLine"></asp:TextBox>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <asp:RequiredFieldValidator ID="val_address" runat="server" ControlToValidate="txt_address" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style12" id="lbl_state" style="font-weight: bold">State<span class="auto-style5">*</span>:</td>
+
+            <td>
+
+                <asp:DropDownList ID="ddl_state" runat="server" Width="220px">
+
+                    <asp:ListItem>Tamil Nadu</asp:ListItem>
+
+                    <asp:ListItem>Rajasthan</asp:ListItem>
+
+                    <asp:ListItem>Gujarat</asp:ListItem>
+
+                    <asp:ListItem>Madhya Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Jammu and Kashmir</asp:ListItem>
+
+                    <asp:ListItem>Maharashtra</asp:ListItem>
+
+                    <asp:ListItem>Bihar</asp:ListItem>
+
+                    <asp:ListItem>Uttar Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Andra Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Arunachal Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Assam</asp:ListItem>
+
+                    <asp:ListItem>Chattisgarh</asp:ListItem>
+
+                    <asp:ListItem>Goa</asp:ListItem>
+
+                    <asp:ListItem>Haryana</asp:ListItem>
+
+                    <asp:ListItem>Haryana</asp:ListItem>
+
+                    <asp:ListItem>Jharkhand</asp:ListItem>
+
+                    <asp:ListItem>Kerala</asp:ListItem>
+
+                    <asp:ListItem>Karnataka</asp:ListItem>
+
+                    <asp:ListItem>Manipur</asp:ListItem>
+
+                    <asp:ListItem>Meghalaya</asp:ListItem>
+
+                    <asp:ListItem>Mizoram</asp:ListItem>
+
+                    <asp:ListItem>Nagaland</asp:ListItem>
+
+                    <asp:ListItem>Orrisa</asp:ListItem>
+
+                    <asp:ListItem>Punjab</asp:ListItem>
+
+                    <asp:ListItem>Sikkim</asp:ListItem>
+
+                    <asp:ListItem>Tripura</asp:ListItem>
+
+                    <asp:ListItem>Uttarakhand</asp:ListItem>
+
+                    <asp:ListItem>West Bengal</asp:ListItem>
+
+                </asp:DropDownList>
+
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ControlToValidate="ddl_state" ErrorMessage="Enter Valid State" ForeColor="#CC0000" ValidationExpression="^[a-zA-Z'.\s]{1,50}"></asp:RegularExpressionValidator>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:RequiredFieldValidator ID="val_state" runat="server" ControlToValidate="ddl_state" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style12" id="lbl_pincode" style="font-weight: bold">PinCode<span class="auto-style5">*</span> : </td>
+
+            <td> <asp:TextBox ID="txt_pincode" runat="server" Width="216px" Height="16px" MaxLength="6" TextMode="Number"></asp:TextBox>
+
+        <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="txt_pincode" ErrorMessage="Enter Valid Pin Code" ForeColor="#CC0000" ValidationExpression="^\d{6}$"></asp:RegularExpressionValidator>
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:RequiredFieldValidator ID="val_pincode" runat="server" ControlToValidate="txt_pincode" ErrorMessage="Required Field " ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+        </tr>
+
+    </table>
+
+    </p>
+
+        <p style="text-align: left">
+
+            &nbsp;</p>
+
+    <p style="text-align: left">
+
+        &nbsp;&nbsp;
+
+        <asp:Button ID="Button1" runat="server" OnClick="Button1_Click1" Text="submit" Width="131px" />
+
+    </p>
+
+    <p style="text-align: left">
+
+        &nbsp;</p>
+
+&nbsp;
+
+      </div>
+
+ 
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Login_Page.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Login_Page" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style>
+
+    .container {
+
+  padding: 16px;
+
+}
+
+               
+
+        .button {
+
+  background-color: #B22222; /* Green */
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+.button4 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #F08080;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button4:hover {
+
+  background-color: #F08080;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+        .auto-style7 {
+
+            width: 93%;
+
+        }
+
+        #grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+        .auto-style9 {
+
+            margin-left: 186px;
+
+        }
+
+        .auto-style17 {
+
+            width: 141px;
+
+            text-align: left;
+
+        }
+
+    .auto-style18 {
+
+        text-align: right;
+
+        width: 141px;
+
+    }
+
+    .auto-style19 {
+
+        width: 141px;
+
+        text-align: left;
+
+        height: 40px;
+
+    }
+
+    .auto-style20 {
+
+        width: 1283px;
+
+        height: 40px;
+
+    }
+
+    .auto-style21 {
+
+        width: 1283px;
+
+    }
+
+    </style>
+
+ 
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+        <div id="grad1" class="auto-style9">
+
+          
+
+            <table class="auto-style7">
+
+                <caption>
+
+                    <h2 style="font-weight: bolder; font-size: xx-large; color: #CC0000">Login</h2>
+
+                 <p style="font-weight: bolder; font-size: xx-large; color: #CC0000">
+
+                     <asp:Label ID="lbl_invalid" runat="server" Font-Size="Medium" ForeColor="Black" Text="Invalid username and password!!  " Visible="False"></asp:Label>
+
+                 </p>
+
+                 <p style="font-weight: bolder; font-size: xx-large; color: #CC0000">&nbsp;</p>
+
+             </caption>
+
+             <tr>
+
+                 <td class="auto-style19">
+
+                     <asp:Label ID="lbl_Username" runat="server" Font-Bold="True" Font-Italic="False" ForeColor="Black" Text="Username:"></asp:Label>
+
+                 </td>
+
+                 <td class="auto-style20">
+
+                     <asp:TextBox ID="txt_username" runat="server" Width="181px"></asp:TextBox>
+
+                     <asp:RequiredFieldValidator ID="val_Username" runat="server" ControlToValidate="txt_username" ErrorMessage="Please enter the valid username." ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                 </td>
+
+             </tr>
+
+             <tr>
+
+                 <td class="auto-style19">
+
+                     <asp:Label ID="lbl_Password" runat="server" Font-Bold="True" Font-Italic="False" Text="Password:"></asp:Label>
+
+                 </td>
+
+                 <td class="auto-style20">
+
+                     <asp:TextBox ID="txt_password" runat="server" Width="180px" TextMode="Password"></asp:TextBox>
+
+                     <asp:RequiredFieldValidator ID="val_password" runat="server" ControlToValidate="txt_password" ErrorMessage="Please enter the correct password." ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                 </td>
+
+             </tr>
+
+             <tr>
+
+                 <td class="auto-style17">
+
+                     <asp:CheckBox ID="RememberMe" runat="server" Text="Remember Me" Font-Bold="True" Font-Italic="True" />
+
+                 </td>
+
+                 <td class="auto-style21">
+
+                     &nbsp;</td>
+
+             </tr>
+
+             <tr>
+
+                 <td class="auto-style18">
+
+                     &nbsp;</td>
+
+                 <td class="auto-style21">
+
+                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+
+                     <asp:Button class="button button3"  ID="btn_Save" runat="server" Font-Bold="True"  Text="Sign In" OnClick="btn_Save_Click"  />
+
+&nbsp;&nbsp;&nbsp;
+
+                     <asp:Button class="button button3"  ID="btn_cancel" runat="server" Font-Bold="True"  Text="Cancel" OnClick="btn_cancel_Click" />
+
+&nbsp;
+
+                 </td>
+
+             </tr>
+
+         </table>
+
+    </div>
+
+ 
+
+ 
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Instructions_Donor.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Instructions_Donor" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+
+    .auto-style9 {
+
+        text-align: center;
+
+            background-color: #FFFFFF;
+
+        }
+
+    #grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+        .auto-style10 {
+
+            background-color: #FFFFFF;
+
+        }
+
+    </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+ 
+
+    <h2 class="auto-style9" style="box-sizing: inherit; clear: both; font-weight: bold; margin: 0px 0px 0.540791em; color: rgb(204, 0, 0); font-size: xx-large; line-height: 1.214; font-family: Poly, Georgia, serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">Eligibility Requirements</h2>
+
+<p class="auto-style10" style="box-sizing: inherit; margin-top: 0px; margin-right: 0px; margin-bottom: 10px !important; margin-left: 0px; max-width: 900px; color: rgb(64, 64, 64); font-family: &quot;Univers Light&quot;, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+
+    In order to donate you must meet the requirements listed below.<br style="box-sizing: inherit;" />
+
+    Please note that this is not a complete list; other eligibility factors will apply.</p>
+
+<ul style="box-sizing: inherit; margin: 0px 0px 30px 20px; padding: 0px; color: rgb(64, 64, 64); font-family: &quot;Univers Light&quot;, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; list-style-type: inherit; list-style-position: inherit; list-style-image: inherit;" class="auto-style10">
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Be in good health and feeling well</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Be at least 18 years old</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Weigh at least 110 pounds</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Are not pregnant</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Possess a valid government-issued photo ID (Example: Driver’s License, Military ID, etc.)</li>
+
+</ul>
+
+<p class="auto-style10" style="box-sizing: inherit; margin-top: 0px; margin-right: 0px; margin-bottom: 10px !important; margin-left: 0px; max-width: 900px; color: rgb(64, 64, 64); font-family: &quot;Univers Light&quot;, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial;">
+
+    <strong style="box-sizing: inherit; font-weight: bold; font-family: &quot;Univers Bold&quot;, Arial, sans-serif; color: #CC0000;">Do NOT donate if any of the following apply to you:</strong></p>
+
+<ul style="box-sizing: inherit; margin: 0px 0px 30px 20px; padding: 0px; color: rgb(64, 64, 64); font-family: &quot;Univers Light&quot;, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; text-decoration-style: initial; text-decoration-color: initial; list-style-type: inherit; list-style-position: inherit; list-style-image: inherit;" class="auto-style10">
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have been diagnosed with HIV/AIDS, Hepatitis B, or Hepatitis C</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have ever used needles to take drugs, steroids, or anything not prescribed by your doctor</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Are a male who has had sexual contact with another male, even once, since 1977</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have ever taken money, drugs, or any other form of payment for sex since 1977</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have had sexual contact in the past 12 months with anyone described above</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have had syphilis or gonorrhea in the past 12 months</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">In the past 12 months have been in juvenile detention, lockup, jail, or prison for more than 72 hours</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have lived in, or visited the United Kingdom, which includes England, Northern Ireland, Scotland, Wales, the<br style="box-sizing: inherit;" />
+
+        Isle of Mann, or Channel Islands from 1980-1996 for a total of 3 months or more</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have spent 5 years or more (total) in Europe since 1980</li>
+
+    <li style="box-sizing: inherit; padding: 5px 0px; margin: 0px;">Have visited a malarial-endemic country within the last year.</li>
+
+</ul>
+
+<p class="auto-style10">
+
+    &nbsp;</p>
+
+    
+
+</asp:Content>
+
+ 
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Hospital_nearby_search.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Hospita" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+
+        .auto-style6 {
+
+            width: 100%;
+
+        }
+
+        .auto-style8 {
+
+            height: 40px;
+
+        }
+
+        .button {
+
+  background-color: #B22222; /* Green */
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+#grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+        .auto-style11 {
+
+            color: #CC0000;
+
+        }
+
+        .auto-style12 {
+
+            height: 40px;
+
+            width: 161px;
+
+            text-align: left;
+
+        }
+
+        .auto-style13 {
+
+            width: 161px;
+
+        }
+
+        .auto-style15 {
+
+            width: 161px;
+
+            text-align: left;
+
+        }
+
+    .auto-style16 {
+
+        margin-left: 0px;
+
+    }
+
+        .auto-style17 {
+
+            height: 40px;
+
+            text-align: left;
+
+        }
+
+        .auto-style18 {
+
+            height: 45px;
+
+        }
+
+    </style>
+
+ 
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+        <table class="auto-style6">
+
+        <tr>
+
+            <td colspan="2" style="font-size: large; font-weight: bold; color: #CC0000" class="auto-style18">Choose your nearest Blood Donation Centre<br />
+
+                <asp:Label ID="Label1" runat="server" Font-Italic="True" Font-Size="Small" Font-Underline="True" Text="Fill up the following details to get you to nearest blood doantion centre:"></asp:Label>
+
+                <br />
+
+                <br />
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <asp:Label ID="lbl_message" runat="server" Text="Sorry, please try a different slot" Visible="False"></asp:Label>
+
+            </td>
+
+            <td style="font-size: large; font-weight: bold; color: #CC0000" class="auto-style18">
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style12">
+
+                <asp:Label ID="lbl_hospital_name" runat="server" Font-Bold="True" Text="Hospital Name:"></asp:Label>
+
+                <span class="auto-style11">*</span>&nbsp;&nbsp;&nbsp;
+
+                </td>
+
+            <td class="auto-style17">
+
+                <asp:TextBox ID="txt_hosp_name" runat="server" Width="142px"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txt_hosp_name" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+            <td class="auto-style8">
+
+                &nbsp;</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style15">
+
+                <asp:Label ID="lbl_city" runat="server" Font-Bold="True" Text="City:"></asp:Label>
+
+                <span class="auto-style11">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            </td>
+
+            <td>
+
+                <asp:DropDownList ID="ddl_city" runat="server" Height="73px" Width="147px">
+
+                    <asp:ListItem>Mumbai</asp:ListItem>
+
+                    <asp:ListItem>Hyderabad</asp:ListItem>
+
+                    <asp:ListItem>Bangalore</asp:ListItem>
+
+                    <asp:ListItem>Ahmedabad</asp:ListItem>
+
+                    <asp:ListItem>Chennai</asp:ListItem>
+
+                    <asp:ListItem>Kolkata</asp:ListItem>
+
+                    <asp:ListItem>Surat</asp:ListItem>
+
+                    <asp:ListItem>Pune</asp:ListItem>
+
+                    <asp:ListItem>Jaipur</asp:ListItem>
+
+                    <asp:ListItem>Lucknow</asp:ListItem>
+
+                    <asp:ListItem>Kanpur</asp:ListItem>
+
+                    <asp:ListItem>Nagpur</asp:ListItem>
+
+                    <asp:ListItem>Indore</asp:ListItem>
+
+                    <asp:ListItem>Thane</asp:ListItem>
+
+                    <asp:ListItem>Patna</asp:ListItem>
+
+                    <asp:ListItem>Vadodra</asp:ListItem>
+
+                    <asp:ListItem>Lidhiana</asp:ListItem>
+
+                    <asp:ListItem>Agra</asp:ListItem>
+
+                    <asp:ListItem>Meerut</asp:ListItem>
+
+                    <asp:ListItem>Rajkot</asp:ListItem>
+
+                    <asp:ListItem>Guntur</asp:ListItem>
+
+                    <asp:ListItem>Bhilai</asp:ListItem>
+
+                    <asp:ListItem>Latur</asp:ListItem>
+
+                    <asp:ListItem>Amravati</asp:ListItem>
+
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddl_city" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+            <td>
+
+                &nbsp;</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style15">
+
+                <asp:Label ID="lbl_date" runat="server" Font-Bold="True" Text="Date:"></asp:Label>
+
+                <span class="auto-style11">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            </td>
+
+            <td>
+
+                <asp:TextBox ID="txt_date" runat="server" CssClass="auto-style16"  TextMode="Date" Width="144px" Height="17px"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txt_date" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+            <td>
+
+                &nbsp;</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style15">
+
+                <asp:Label ID="lbl_time" runat="server" Font-Bold="True" Text="Time:"></asp:Label>
+
+                <span class="auto-style11">*</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            </td>
+
+            <td>
+
+                <asp:TextBox ID="txt_time" runat="server" TextMode="DateTime" Width="142px"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_time" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+            <td>
+
+                &nbsp;</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style13">
+
+                <asp:Button class="button button3" ID="btn_hosp_search" runat="server"  Text="Enable Search" OnClick="btn_hosp_search_Click" />
+
+            </td>
+
+            <td>
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+            </td>
+
+            <td>
+
+                &nbsp;</td>
+
+        </tr>
+
+    </table>
+
+</div>
+
+</asp:Content>
+
+ 
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Home_Page.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Home_Page" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+        <style>
+
+        .leftcolumn {  
+
+  float: left;
+
+  width: 75%;
+
+}
+
+ 
+
+/* Right column */
+
+.rightcolumn {
+
+  float: left;
+
+  width: 25%;
+
+  background-color: #f1f1f1;
+
+  padding-left: 20px;
+
+}
+
+/* Add a card effect for articles */
+
+.card {
+
+  background-color: white;
+
+  padding: 10px;
+
+  margin-top: 20px;
+
+}
+
+ 
+
+/* Clear floats after the columns */
+
+.row:after {
+
+  content: "";
+
+  display: table;
+
+  clear: both;
+
+}
+
+        .auto-style5 {
+
+            text-align: justify;
+
+            width: 510px;
+
+        }
+
+        .auto-style6 {
+
+            float: left;
+
+            width: 50%;
+
+            background-color: white;
+
+            padding-left: 20px;
+
+        height: 352px;
+
+    }
+
+        .auto-style9 {
+
+            height: 149px;
+
+            width: 511px;
+
+        }
+
+ 
+
+     
+
+.button {
+
+  background-color: #B22222; /* Green */
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+          .auto-style10 {
+
+        text-align: justify;
+
+        width: 510px;
+
+    }
+
+ 
+
+          .auto-style11 {
+
+        float: left;
+
+        width: 679px;
+
+        height: 499px;
+
+    }
+
+    .auto-style12 {
+
+        background-color: white;
+
+        padding: 10px;
+
+        margin-top: 20px;
+
+        height: 820px;
+
+    }
+
+      #grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+ 
+
+          </style>
+
+ 
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+      
+
+    <div  class="row" style="height: 1135px">
+
+  <div  class="auto-style11">
+
+    <div  class="card">
+
+      <h2>Why You Should Donate Blood</h2>
+
+        <img src="blood2.jpg" ;width:"50px" class="auto-style9"/>
+
+        <p class="auto-style10">Our Nation requires 4 crores units of blood while only 40 lakh units are available.Every two seconds of every day, someone needs blood.
+
+       Since blood cannot be manufactured outside the body and has a limited shelf life, the supply must constantly be replenished by generous blood donors.
+
+            37% of the population is eligible to donate blood, yet only 5% actually do. Blood donors play a vital role in the healthcare of patients in your community.
+
+            With every blood donation, you are providing strength, hope and courage to patients and their families in your local hospitals..
+
+            Also donating blood will improve good health by reducing risk of cancer, regulating the cardiovascular health and reducing obesity.</p>
+
+        </div>
+
+      </div>
+
+    <div class="auto-style6">
+
+    <div  class="auto-style12">
+
+      <h2>Want to Become a Donor?</h2>
+
+        <asp:Button class="button button3" ID="RegisterButton1" runat="server" Text="Register" OnClick="RegisterButton1_Click" />
+
+        <br />
+
+        <h2>Already a Donor?</h2>
+
+        <asp:Button  class="button button3" ID="LoginButton1" runat="server" Text="Login" Width="135px" OnClick="LoginButton1_Click"/>
+
+        <br />
+
+        <br />
+
+        <asp:GridView ID="grd_feedback" AutoGenerateColumns="false" runat="server" Width="703px">
+
+             <Columns>
+
+                
+
+                    <asp:BoundField DataField="FeedBack_Comments" HeaderText="Donor FeedBack" />
+
+                 
+
+        </Columns>
+
+        </asp:GridView>
+
+        <br />
+
+        &nbsp;<asp:GridView ID="grd_postrequest" AutoGenerateColumns="false" runat="server" Height="234px" Width="707px"  >
+
+             <Columns>
+
+                
+
+                    <asp:BoundField DataField="Blood_Group" HeaderText="Blood Group Needed" />
+
+                   <asp:BoundField DataField="Post_Request" HeaderText="Post Request for the blood requirement "/>
+
+                    <asp:BoundField DataField="Contact_Number" HeaderText="Contact Number for request" />
+
+        </Columns>
+
+             <EditRowStyle HorizontalAlign="Center" />
+
+             <RowStyle HorizontalAlign="Center" VerticalAlign="Middle" />
+
+             <SelectedRowStyle HorizontalAlign="Center" />
+
+        </asp:GridView>
+
+        </div>
+
+        </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+ 
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Feedback_Form.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Feedback_Form" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+
+        .auto-style6 {
+
+            width: 42%;
+
+        }
+
+        .auto-style7 {
+
+        width: 1386px;
+
+        height: 11px;
+
+    }
+
+    .auto-style8 {
+
+        width: 1386px;
+
+        height: 40px;
+
+    }
+
+    .auto-style9 {
+
+        height: 40px;
+
+        width: 389px;
+
+    }
+
+    .auto-style10 {
+
+        width: 389px;
+
+    }
+
+    .button {
+
+  background-color: #B22222; /* Green */
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+#grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+    </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+    <table class="auto-style6">
+
+        <tr>
+
+            <td colspan="2" style="font-size: large; font-weight: bold; color: #CC0000; font-style: normal">Blood Donation Experience Form&nbsp;<br />
+
+                <asp:Label ID="Label1" runat="server" Font-Size="Small" ForeColor="#CC0000" Text="For a better donation experience"></asp:Label>
+
+                ,<br />
+
+                Hydrate,Eat Salty Snacks,Get sleep,Hydrate!</td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style8">
+
+                <asp:Label ID="lbl_hosp_name" runat="server" Font-Bold="True" Text="Hospital Name:"></asp:Label>
+
+            </td>
+
+            <td class="auto-style9">
+
+                <asp:TextBox ID="txt_hospital_name" runat="server" Width="365px"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="val_hosp_name" runat="server" ControlToValidate="txt_hospital_name" ErrorMessage="Enter the hospital name." ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style7">
+
+                <asp:Label ID="lbl_city" runat="server" Font-Bold="True" Text="City:"></asp:Label>
+
+            </td>
+
+            <td class="auto-style10">
+
+                <asp:DropDownList ID="ddl_city" runat="server" Height="40px">
+
+                    <asp:ListItem>Mumbai</asp:ListItem>
+
+                    <asp:ListItem>Hyderabad</asp:ListItem>
+
+                    <asp:ListItem>Bangalore</asp:ListItem>
+
+                    <asp:ListItem>Ahmedabad</asp:ListItem>
+
+                    <asp:ListItem>Chennai</asp:ListItem>
+
+                    <asp:ListItem>Kolkata</asp:ListItem>
+
+                    <asp:ListItem>Surat</asp:ListItem>
+
+                    <asp:ListItem>Pune</asp:ListItem>
+
+                    <asp:ListItem>Jaipur</asp:ListItem>
+
+                    <asp:ListItem>Lucknow</asp:ListItem>
+
+                    <asp:ListItem>Kanpur</asp:ListItem>
+
+                    <asp:ListItem>Nagpur</asp:ListItem>
+
+                    <asp:ListItem>Indore</asp:ListItem>
+
+                    <asp:ListItem>Thane</asp:ListItem>
+
+                    <asp:ListItem>Patna</asp:ListItem>
+
+                    <asp:ListItem>Vadodra</asp:ListItem>
+
+                    <asp:ListItem>Lidhiana</asp:ListItem>
+
+                    <asp:ListItem>Agra</asp:ListItem>
+
+                    <asp:ListItem>Meerut</asp:ListItem>
+
+                    <asp:ListItem>Rajkot</asp:ListItem>
+
+                    <asp:ListItem>Guntur</asp:ListItem>
+
+                    <asp:ListItem>Bhilai</asp:ListItem>
+
+                    <asp:ListItem>Latur</asp:ListItem>
+
+                    <asp:ListItem>Amravati</asp:ListItem>
+
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator ID="val_city" runat="server" ControlToValidate="ddl_city" ErrorMessage="Enter the city." ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style8">
+
+                <asp:Label ID="lbl_feebback" runat="server" Font-Bold="True" Text="Feedback Comments:"></asp:Label>
+
+            </td>
+
+            <td class="auto-style9">
+
+                <asp:TextBox ID="txt_feedback_details" runat="server" Height="45px" TextMode="MultiLine" Width="371px"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="val_feedback_comments" runat="server" ControlToValidate="txt_feedback_details" ErrorMessage="Please share your comments." ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td colspan="2">
+
+                <br />
+
+                <asp:Button class="button button3" ID="btn_feedback" runat="server" Font-Bold="True" Text="Submit Feedback" OnClick="btn_feedback_Click" />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+                <br />
+
+            </td>
+
+        </tr>
+
+    </table>
+
+        </div>
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="FAQ.aspx.cs" Inherits="OnlineBloodBankDonationSystem.FAQ" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+
+    .auto-style9 {
+
+        float: left;
+
+        width: 748.8px;
+
+        margin-right: 361px;
+
+    }
+
+    .auto-style10 {
+
+        width: 1460px;
+
+        text-align: center;
+
+    }
+
+    .auto-style11 {
+
+        width: 1050px;
+
+    }
+
+    .auto-style12 {
+
+        width: 1051px;
+
+    }
+
+    .auto-style13 {
+
+        width: 1063px;
+
+    }
+
+    .auto-style14 {
+
+        width: 1059px;
+
+    }
+
+    .auto-style15 {
+
+        width: 1061px;
+
+    }
+
+    .auto-style16 {
+
+        width: 1066px;
+
+    }
+
+    .auto-style17 {
+
+        width: 1068px;
+
+    }
+
+    .auto-style18 {
+
+        width: 1070px;
+
+    }
+
+    .auto-style19 {
+
+        width: 1073px;
+
+    }
+
+    .auto-style20 {
+
+        width: 1082px;
+
+    }
+
+    .auto-style21 {
+
+        width: 1079px;
+
+    }
+
+    #grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+</style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+  
+
+    <h1 class="auto-style10" style="margin: 0px 0px 10px; line-height: 1.3em; color: rgb(34, 34, 34); font-size: 1.8em; display: block; font-family: open_sansregular, Arial, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;"><span style="color: #CC0000; font-size: xx-large; font-weight: bold">Blood Donation FAQs</span></h1>
+
+<p class="auto-style10" style="margin: 0px 0px 10px; line-height: 1.3em; color: rgb(34, 34, 34); font-size: 1.8em; display: block; font-family: open_sansregular, Arial, sans-serif; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">
+
+    &nbsp;</p>
+
+<div  class="row" style="clear: both; color: rgb(85, 85, 85); font-family: open_sansregular, Arial, sans-serif; font-size: 14px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-style: initial; text-decoration-color: initial;">
+
+    <div  class="col wide col-main" style="float: left; min-height: 1px; box-sizing: border-box; width: 748.8px;">
+
+        <div class="col-inner">
+
+            <div class="row page-content" style="clear: both;">
+
+                <div class="auto-style9" style="min-height: 1px; box-sizing: border-box;">
+
+                    <div id="ctl00_PlaceHolderMain_ctl01__ControlWrapper_RichHtmlField" aria-labelledby="ctl00_PlaceHolderMain_ctl01_label" class="ms-rtestate-field" style="overflow-wrap: break-word; display: inline;">
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">What are the minimum requirements to become a blood donor?</h4>
+
+                        <p class="auto-style11" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Check with your<span>&nbsp;local blood bank&nbsp;</span>to determine the&nbsp;specific requirements. You must be at least 16 years of age, a minimum of 110 pounds, and in basic good health.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Will donating blood hurt?</h4>
+
+                        <p class="auto-style12" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            You might feel a slight sting in the beginning lasting only a couple of seconds, but there should be no discomfort during the donation.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Are blood donors paid?</h4>
+
+                        <p style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            No. Blood collected for transfusion in the US is&nbsp;collected from&nbsp;volunteer blood donors.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">How badly is blood needed?</h4>
+
+                        <p class="auto-style13" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Blood supplies&nbsp;vary depending on the region and time of year. As more restrictive donor criteria are necessary to protect the safety of the blood supply and as the donor population ages, the inventory levels are affected across the nation. If you are eligible, your blood donations are needed. The inventory levels of blood would be more consistently maintained if more of those who are eligible donate 1-2 times each year.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Why are there often blood shortages?</h4>
+
+                        <p class="auto-style14" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Most blood centers strive to maintain an optimum inventory level of a three-day supply. Due to unpredictable demands for trauma patients, the inventory fluctuates hourly. When the blood supply drops below a three-day level, blood centers begin alerting local donors to increase the inventory to a safe operating level.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Are sterile supplies used?</h4>
+
+                        <p class="auto-style15" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Based on AABB Standards and FDA regulations, all needles, tubing sets, collection bags and other donation supplies are sterile, used once, and discarded in the trash to protect the donor, the transfusion recipient, and the blood donor center staff.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">How much blood is taken?</h4>
+
+                        <p class="auto-style14" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            For a whole blood donation, approximately 500 ml or one-half liter of blood is collected. For donations of other blood products, such as platelet or plasma, the amount collected depends on your height, weight and platelet count.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">How often may I donate?</h4>
+
+                        <p class="auto-style16" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            The Medical Director of each blood donor center is responsible&nbsp;for setting policies regarding the frequency of donation. The policies set by a Medical Director can be more restrictive, permitting donation less frequently than permitted by AABB Standards and FDA regulations. Based on AABB and FDA requirements, you must wait&nbsp;56 days between whole blood donations. Platelet (apheresis) donors may donate more frequently. This is because the body replenishes platelets and plasma more quickly than red cells. Platelets will return to normal levels within about 72 hours of donating. Plasma (the liquid portion of your blood) will return to normal levels within a couple of days.&nbsp;</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Does donated blood stay on the shelf indefinitely until it is used?</h4>
+
+                        <p class="auto-style16" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            No. Each unit of whole blood&nbsp;is separated into several components. Red blood cells may be stored under refrigeration for a maximum of 42 days, or&nbsp;frozen for up to 10 years.&nbsp;Platelets are stored at room temperature and may be kept for a maximum of&nbsp;five to seven days. Fresh frozen plasma is kept in a stored frozen state for&nbsp;up to one year. Cryoprecipitated AHF is stored frozen for up to one year. Granulocytes must be transfused within 24 hours of donation.</p>
+
+                        <p class="auto-style17" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Other products manufactured from blood include albumin, immune globulin, specific immune globulins, and clotting factor concentrates. Commercial manufacturers commonly produce these blood products.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Are the&nbsp;history questions necessary every time I donate?</h4>
+
+                        <p class="auto-style18" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Yes, this&nbsp;ensures the safest possible blood supply, all donors must be asked all the screening questions at each donation. Both AABB and FDA regulations specifically require that all blood donors complete the donor history questionnaire on the day of donation and prior to donating.&nbsp;</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">What is the most common blood type?</h4>
+
+                        <p class="auto-style19" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            The approximate distribution of blood types in the U.S. blood donor population is as follows. Distribution may be different for specific racial and ethnic groups and in different parts of the country:</p>
+
+                        <p style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            <strong>O Rh-positive --- 39 percent<span>&nbsp;</span><br />
+
+                            O Rh-negative ---&nbsp; 9 percent<span>&nbsp;</span><br />
+
+                            A Rh-positive ---&nbsp;30 percent<span>&nbsp;</span><br />
+
+                            A Rh-negative ---&nbsp; 6 percent<br />
+
+                            B Rh-positive ---&nbsp;&nbsp;&nbsp; 9 percent<br />
+
+                            B Rh-negative ---&nbsp;&nbsp; 2 percent<span>&nbsp;</span><br />
+
+                            AB Rh-positive ---&nbsp; 4 percent<span>&nbsp;</span><br />
+
+                            AB Rh-negative --- 1 percent</strong></p>
+
+                        <p class="auto-style20" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            In an emergency, anyone can receive type O red blood cells. Therefore, people with type O blood are known as &quot;universal blood donors.&quot; In addition, individuals with AB type plasma are the universal plasma donors.</p>
+
+                        <h4 style="margin: 0px 0px 0.25em; line-height: 1.2em; color: rgb(204, 0, 0); font-size: 1.25em;">Is there such thing as artificial blood?</h4>
+
+                        <p class="auto-style21" style="margin: 0px 0px 1.5em; line-height: 1.5em;">
+
+                            Scientists have yet to find a successful substitute for human blood. This is why blood donors are so vital to the lives of those who are in need of blood.</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+    <br />
+
+</div>
+
+       
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Donor_Receiver.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Donor_Receiver" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+
+        .auto-style5 {
+
+            text-align: center;
+
+        }
+
+        .button {
+
+  background-color: #B22222; /* Green */
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+        .newStyle2 {
+
+            color: #CC0000;
+
+        }
+
+#grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+        .auto-style9 {
+
+            font-family: "Comic Sans MS";
+
+            font-size: x-large;
+
+            text-align: center;
+
+        }
+
+    </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1" style="font-size: large">
+
+    <p>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+    <p class="auto-style3" style="font-size: xx-large; font-weight: bold; font-style: italic; color: #CC0000;">
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome To Online Blood Bank!</p>
+
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+
+            <asp:Label ID="lbl_tag" runat="server" BackColor="#66CCFF" Font-Bold="True" Font-Size="Small" Text="Save A Life,Give Blood!!"></asp:Label>
+
+        &nbsp;
+
+        <p class="auto-style3">
+
+            &nbsp;</p>
+
+        <p class="auto-style9">
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Button class="button button3" ID="btn_donor" runat="server" Font-Bold="True"  Text="Donor" OnClick="btn_donor_Click" />
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <asp:Button class="button button3" ID="btn_donor_feedback" runat="server"  Font-Bold="True" Text="Donor Feedback" OnClick ="btn_receiver_Click"  />
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+            <asp:Button class="button button3" ID="btn_blood_availability" runat="server" Font-Bold="True"  Text="Blood Availability check" OnClick ="Button3_Click"/>
+
+        &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<asp:Button class="button button3" ID="btn_Request_for_blood" runat="server" Font-Bold="True" Text="Post Request for Blood" OnClick="Button4_Click"/>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+        <p class="auto-style3">
+
+            &nbsp;</p>
+
+        <p class="auto-style3">
+
+            &nbsp;</p>
+
+        <p class="auto-style3">
+
+            &nbsp;</p>
+
+        <p class="auto-style3">
+
+            &nbsp;</p>
+
+        <p class="auto-style3">
+
+            &nbsp;</p>
+
+        <p class="auto-style3">
+
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+
+         </div>
+
+<br />
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Donor_Form.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Donor_Form" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+        <style type="text/css">
+
+        .auto-style6 {
+
+            width: 34%;
+
+        }
+
+        .auto-style7 {
+
+                width: 1360px;
+
+                height: 11px;
+
+            }
+
+        .auto-style8 {
+
+                width: 1360px;
+
+                height: 40px;
+
+            }
+
+        .auto-style9 {
+
+                height: 40px;
+
+            }
+
+        .auto-style10 {
+
+            height: 73px;
+
+        }
+
+        .button {
+
+  background-color: #B22222; /* Green */
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+#grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+            .auto-style11 {
+
+                color: #CC0000;
+
+            }
+
+    </style>
+
+ 
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+        <table class="auto-style6">
+
+        <tr>
+
+            <td colspan="2" style="font-size: large; font-weight: bold; color: #CC0000">Blood Donation Enrolment Form<br />
+
+                <asp:Label ID="lbl_donor_details" runat="server" Font-Bold="False" Font-Italic="True" Font-Underline="True" ForeColor="#CC0000" Text="Your Details"></asp:Label>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style8">
+
+                <asp:Label ID="LBL_blood_grp" runat="server" Font-Bold="True" Text="Blood Group:"></asp:Label>
+
+                <span class="auto-style11">*</span></td>
+
+            <td class="auto-style9">
+
+                <asp:DropDownList ID="ddl_blood_group" runat="server" Width="125px">
+
+                    <asp:ListItem>A+</asp:ListItem>
+
+                    <asp:ListItem>A-</asp:ListItem>
+
+                    <asp:ListItem>B+</asp:ListItem>
+
+                    <asp:ListItem>B+</asp:ListItem>
+
+                    <asp:ListItem>AB+</asp:ListItem>
+
+                    <asp:ListItem>AB-</asp:ListItem>
+
+                    <asp:ListItem>O-</asp:ListItem>
+
+                    <asp:ListItem>O+</asp:ListItem>
+
+                    <asp:ListItem></asp:ListItem>
+
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddl_blood_group" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style8">
+
+                <asp:Label ID="lbl_state" runat="server" Font-Bold="True" Text="State:"></asp:Label>
+
+                <span class="auto-style11">*</span></td>
+
+            <td class="auto-style9">
+
+                <asp:DropDownList ID="ddl_state" runat="server" Width="124px">
+
+                    <asp:ListItem>Maharashtra</asp:ListItem>
+
+                    <asp:ListItem>Bangalore</asp:ListItem>
+
+                    <asp:ListItem>Gujarat</asp:ListItem>
+
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddl_state" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style7">
+
+                <asp:Label ID="lbl_area" runat="server" Font-Bold="True" Text="Area:"></asp:Label>
+
+                <span class="auto-style11">*</span></td>
+
+            <td>
+
+                <asp:DropDownList ID="ddl_area" runat="server" Width="125px">
+
+                    <asp:ListItem>Pune</asp:ListItem>
+
+                    <asp:ListItem>Nagpur</asp:ListItem>
+
+                    <asp:ListItem>Varora</asp:ListItem>
+
+                    <asp:ListItem>Mumbai</asp:ListItem>
+
+                    <asp:ListItem>washim</asp:ListItem>
+
+                    <asp:ListItem>Amravati</asp:ListItem>
+
+                    <asp:ListItem>Hinjewadi</asp:ListItem>
+
+                    <asp:ListItem>Shivaji Nagar</asp:ListItem>
+
+                    <asp:ListItem>Wardha</asp:ListItem>
+
+                    <asp:ListItem>Meerut</asp:ListItem>
+
+                    <asp:ListItem>Hyderabad</asp:ListItem>
+
+                    <asp:ListItem>Haryana</asp:ListItem>
+
+                    <asp:ListItem>Gudgaon</asp:ListItem>
+
+                    <asp:ListItem>Gondia</asp:ListItem>
+
+                    <asp:ListItem>Mahabaleshwar</asp:ListItem>
+
+                    <asp:ListItem>Kochi</asp:ListItem>
+
+                    <asp:ListItem>Pulgaon</asp:ListItem>
+
+                </asp:DropDownList>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="ddl_area" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style7">
+
+                <asp:Label ID="lbl_pincode" runat="server" Font-Bold="True" Text="Pincode:"></asp:Label>
+
+                <span class="auto-style11">*</span></td>
+
+            <td>
+
+                <asp:TextBox ID="txt_pincode" runat="server" Width="122px"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txt_pincode" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+&nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txt_pincode" ErrorMessage="Enter Valid Pin Code" ForeColor="#CC0000" ValidationExpression="^\d{6}$"></asp:RegularExpressionValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style7">
+
+                <asp:Label ID="txt_contact_number" runat="server" Font-Bold="True" Text="Contact Number:"></asp:Label>
+
+                <span class="auto-style11">*</span></td>
+
+            <td>
+
+                <asp:TextBox ID="txt_phone_number" runat="server" Width="120px" MaxLength="10"></asp:TextBox>
+
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="txt_phone_number" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+&nbsp;<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="txt_phone_number" ErrorMessage="Enter Valid Contact Number" ForeColor="#CC0000" ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="auto-style10" colspan="2" style="font-size: medium; font-weight: bold; font-style: italic; color: #808080">
+
+                <asp:Button class="button button3" ID="btn_Donor_submit" runat="server" Font-Bold="True"  Text="Submit (Be_An_Active_Donor)" OnClick="btn_Donor_submit_Click"/>
+
+                <br />
+
+                <br />
+
+                Find the hero in you:-)<br />
+
+                <br />
+
+                <br />
+
+            </td>
+
+        </tr>
+
+    </table>
+
+        </div>
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Check_BloodAvailability_GridView.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Check_BloodAvailability_GridView" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+     <style type="text/css">
+
+        .auto-style6 {
+
+            margin-right: 0px;
+
+        }
+
+         .button {
+
+  background-color: #B22222;
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+#grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+    </style>
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+    <header>
+
+    <br />
+
+    <asp:Label ID="lbl_status" runat="server" Font-Bold="True" ForeColor="#990000" Text="No result found!!:-( :-(" Visible="False"></asp:Label>
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <asp:Button class="button button3"  ID="btn_result" runat="server"  Text="Back" OnClick="btn_result_Click"  Visible="False" Height="52px" Width="113px" />
+
+    <br />
+
+</header>
+
+  
+
+        <div>
+
+  
+
+ 
+
+    <asp:GridView ID="grd_Avail_Blood" runat="server" Width="1117px"  AutoGenerateColumns="False" CssClass="auto-style6" Height="190px" >
+
+         <Columns>
+
+                
+
+                    <asp:BoundField DataField="BloodGroup" HeaderText="Blood_Group_Name" />
+
+                    <asp:BoundField DataField="State" HeaderText="State"/>
+
+                    <asp:BoundField DataField="Area" HeaderText="Area" />
+
+                    <asp:BoundField DataField="Pincode" HeaderText="Pincode"/>
+
+                    <asp:BoundField DataField="ContactNumber" HeaderText="Contact_Number" />
+
+        </Columns>
+
+    </asp:GridView>
+
+                  <br />
+
+            <br />
+
+            <br />
+
+                  </div>
+
+   </div>
+
+      
+
+</asp:Content>
+
+ 
+
+<%@ Page Title="" Language="C#" MasterPageFile="~/OnlineBloodBankDonationSystem.Master" AutoEventWireup="true" CodeBehind="Check_BloodAvailability.aspx.cs" Inherits="OnlineBloodBankDonationSystem.Check_BloodAvailability" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+        <style type="text/css">
+
+        .auto-style5 {
+
+            text-align: left;
+
+        }
+
+ 
+
+        .button {
+
+  background-color: #B22222;
+
+  border: none;
+
+  color: white;
+
+  padding: 16px 32px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  display: inline-block;
+
+  font-size: 16px;
+
+  margin: 4px 2px;
+
+  -webkit-transition-duration: 0.4s; /* Safari */
+
+  transition-duration: 0.4s;
+
+  cursor: pointer;
+
+}
+
+.button3 {
+
+  background-color: white;
+
+  color: black;
+
+  border: 2px solid #B22222;
+
+  border-radius: 12px;
+
+}
+
+ 
+
+.button3:hover {
+
+  background-color: #B22222;
+
+  color: white;
+
+  border-radius: 12px;
+
+}
+
+        .auto-style6 {
+
+            text-align: center;
+
+        }
+
+            .auto-style7 {
+
+                width: 100%;
+
+            }
+
+            .auto-style9 {
+
+                color: #CC0000;
+
+            }
+
+            #grad1 {
+
+  background-image: linear-gradient(to right, rgba(255,0,0,0), #ff6666); /* Standard syntax (must be last) */
+
+}
+
+    .auto-style11 {
+
+        text-align: left;
+
+        color: #CC0000;
+
+    }
+
+    .auto-style13 {
+
+                height: 40px;
+
+                width: 1650px;
+
+            }
+
+            .auto-style14 {
+
+                margin-left: 26px;
+
+            }
+
+            .auto-style15 {
+
+                width: 1650px;
+
+            }
+
+            .auto-style16 {
+
+                width: 186px;
+
+                text-align: left;
+
+            }
+
+            .auto-style17 {
+
+                width: 186px;
+
+                text-align: left;
+
+                height: 40px;
+
+            }
+
+    </style>
+
+ 
+
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+    <div id="grad1">
+
+        <%--<h2 style="color: #CC0000; background-color: #FFFFFF">&nbsp;</h2>--%>
+
+        <h2 >Blood Availability</h2>
+
+    <p class="auto-style6">
+
+        <strong>
+
+        <asp:Label ID="Label1" runat="server" Text="No search results found. Would you still like to add requirements ? Homepage" Visible="False" CssClass="auto-style9" ForeColor="Black"></asp:Label>
+
+        </strong>&nbsp;&nbsp;</p>
+
+        <table class="auto-style7">
+
+            <tr>
+
+                <td class="auto-style16" id="lbl_blood_group" style="font-weight: bold">Blood Group:<span class="auto-style11">*</span></td>
+
+                <td class="auto-style15">
+
+        <asp:DropDownList ID="ddl_blood_group" runat="server" Height="22px" Width="220px">
+
+            <asp:ListItem>A+</asp:ListItem>
+
+            <asp:ListItem>A-</asp:ListItem>
+
+            <asp:ListItem>B+</asp:ListItem>
+
+            <asp:ListItem>B-</asp:ListItem>
+
+            <asp:ListItem>AB+</asp:ListItem>
+
+            <asp:ListItem>AB-</asp:ListItem>
+
+            <asp:ListItem>O+</asp:ListItem>
+
+            <asp:ListItem>O-</asp:ListItem>
+
+        </asp:DropDownList>
+
+                    <asp:RequiredFieldValidator ID="rfvbloodgroupname" runat="server" ControlToValidate="ddl_blood_group" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style16" id="lbl_area" style="font-weight: bold">Area:<span class="auto-style11">*</span>&nbsp; </td>
+
+                <td class="auto-style15"> <asp:DropDownList ID="ddl_area" runat="server" Height="22px" Width="220px">
+
+                    <asp:ListItem>Pune</asp:ListItem>
+
+                    <asp:ListItem>Mumbai</asp:ListItem>
+
+                    <asp:ListItem>Nagpur</asp:ListItem>
+
+                    <asp:ListItem>wakad</asp:ListItem>
+
+                    <asp:ListItem>Hinjewadi</asp:ListItem>
+
+                    <asp:ListItem>Viman Nagar</asp:ListItem>
+
+                    <asp:ListItem>SBRoad</asp:ListItem>
+
+                    <asp:ListItem>Pratap Nagar</asp:ListItem>
+
+        </asp:DropDownList>
+
+                    <asp:RequiredFieldValidator ID="rfvarea" runat="server" ControlToValidate="ddl_area" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style16" id="lbl_state" style="font-weight: bold">State:<span class="auto-style11">*</span></td>
+
+                <td class="auto-style15">
+
+    <asp:DropDownList ID="ddl_state" runat="server" Height="22px" Width="220px">
+
+        <asp:ListItem>Tamil Nadu</asp:ListItem>
+
+                    <asp:ListItem>Rajasthan</asp:ListItem>
+
+                    <asp:ListItem>Gujarat</asp:ListItem>
+
+                    <asp:ListItem>Madhya Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Jammu and Kashmir</asp:ListItem>
+
+                    <asp:ListItem>Maharashtra</asp:ListItem>
+
+                    <asp:ListItem>Bihar</asp:ListItem>
+
+                    <asp:ListItem>Uttar Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Andra Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Arunachal Pradesh</asp:ListItem>
+
+                    <asp:ListItem>Assam</asp:ListItem>
+
+                    <asp:ListItem>Chattisgarh</asp:ListItem>
+
+                    <asp:ListItem>Goa</asp:ListItem>
+
+                    <asp:ListItem>Haryana</asp:ListItem>
+
+                    <asp:ListItem>Haryana</asp:ListItem>
+
+                    <asp:ListItem>Jharkhand</asp:ListItem>
+
+                    <asp:ListItem>Kerala</asp:ListItem>
+
+                    <asp:ListItem>Karnataka</asp:ListItem>
+
+                    <asp:ListItem>Manipur</asp:ListItem>
+
+                    <asp:ListItem>Meghalaya</asp:ListItem>
+
+                    <asp:ListItem>Mizoram</asp:ListItem>
+
+                    <asp:ListItem>Nagaland</asp:ListItem>
+
+                    <asp:ListItem>Orrisa</asp:ListItem>
+
+                    <asp:ListItem>Punjab</asp:ListItem>
+
+                    <asp:ListItem>Sikkim</asp:ListItem>
+
+                    <asp:ListItem>Tripura</asp:ListItem>
+
+                    <asp:ListItem>Uttarakhand</asp:ListItem>
+
+                    <asp:ListItem>West Bengal</asp:ListItem>
+
+    </asp:DropDownList>
+
+                    <asp:RequiredFieldValidator ID="rfvstate" runat="server" ControlToValidate="ddl_state" ErrorMessage="Required Field" ForeColor="#CC0000"></asp:RequiredFieldValidator>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style17" id="lbl_pincode" style="font-weight: bold">Pin Code:<span class="auto-style11">*</span></td>
+
+                <td class="auto-style13">
+
+    <asp:TextBox ID="txt_pincode" runat="server" Width="220px" Height="16px"></asp:TextBox>
+
+                    <asp:RegularExpressionValidator ID="revpincode" runat="server" ControlToValidate="txt_pincode" ErrorMessage="Enter Valid Pin Code" ForeColor="#CC0000" ValidationExpression="^\d{6}$"></asp:RegularExpressionValidator>
+
+&nbsp;
+
+                    <br />
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="auto-style17" id="lbl_contact_number" style="font-weight: bold">Contact Number:<span class="auto-style11">*</span></td>
+
+                <td class="auto-style13">
+
+                    <asp:TextBox ID="txt_contact_number" runat="server" Height="16px" Width="220px"></asp:TextBox>
+
+                    <asp:RegularExpressionValidator ID="revcontactno" runat="server" ControlToValidate="txt_contact_number" ErrorMessage="Enter Valid Contact Number" ForeColor="#CC0000" ValidationExpression="^\d{10}$"></asp:RegularExpressionValidator>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+    <asp:Button class="button button3" ID="btb_search" runat="server" Text="Search" OnClick="btb_search_Click"/>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+    <p class="auto-style5">
+
+        &nbsp;</p>
+
+        </div>
+
+</asp:Content>
+
+ 

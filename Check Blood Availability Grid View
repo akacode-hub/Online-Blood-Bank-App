@@ -1,0 +1,95 @@
+using System;
+
+using System.Collections.Generic;
+
+using System.Linq;
+
+using System.Web;
+
+using System.Web.UI;
+
+using System.Web.UI.WebControls;
+
+using OnlineBloodBankSystem_Dao;
+
+using OnlineBloodBankSystem_Model;
+
+using System.Data;
+
+using System.Data.SqlClient;
+
+using System.Configuration;
+
+ 
+
+namespace OnlineBloodBankDonationSystem
+
+{
+
+    public partial class Check_BloodAvailability_GridView : System.Web.UI.Page
+
+    {
+
+        protected void Page_Load(object sender, EventArgs e)
+
+        {
+
+            Helper.constructor = ConfigurationManager.ConnectionStrings["con"].ConnectionString;
+
+            if (!IsPostBack)
+
+            {
+
+              
+
+ 
+
+                ReceiverCollectionDao obj = new ReceiverCollectionDao();
+
+                string Receiver_Bloodgroup = Session["bloodgroup"].ToString();
+
+ 
+
+               
+
+                List<Donor_Details> result = obj.Blood_Availability_Request(Receiver_Bloodgroup);
+
+ 
+
+                bool isEmpty = result.Any();
+
+                if (!isEmpty)
+
+                {
+
+                    lbl_status.Visible = true;
+
+                    btn_result.Visible = true;
+
+                }
+
+            
+
+ 
+
+                grd_Avail_Blood.DataSource = result;
+
+                grd_Avail_Blood.DataBind();
+
+            }
+
+        }
+
+ 
+
+        protected void btn_result_Click(object sender, EventArgs e)
+
+        {
+
+            Response.Redirect("Donor_Receiver.aspx");
+
+        }
+
+    }
+
+}
